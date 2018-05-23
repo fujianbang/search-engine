@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="static/css/engine.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>数据分析 | Fin Search!</title>
+</head>
+<body>
+    <div class='container'>
+        <h2>haha</h2>
+        <div id="main" style="style:600px;height:400px;"></div>
+    </div>
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    // 初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    option = {
+        title: {
+            text: '编程语言需求情况',
+            subtext: '51job.com',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+                     formatter: "{a}<br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            bottom: 10,
+            left: 'center',
+            data:['Python', 'Java', 'C#', 'C++', 'C', 'R', '其它']
+        },
+        series: [{
+            name: '需求情况',
+            type: 'pie',
+            radius: '65%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            data: [
+                {
+                    value: 10000,
+                    name: 'Python',
+                },
+                {
+                    value: 8000,
+                    name:'Java',
+                },
+                {
+                    value: 7000,
+                    name: 'C#',
+                },
+                {
+                    value: 5300,
+                    name: 'C++',
+                },
+                {
+                    value: 3432,
+                    name: 'C',
+                },
+                {
+                    value: 2000,
+                    name: 'R',
+                },
+                {
+                    value: 1800,
+                    name: '其它'
+                }
+            ],
+            itemStyle: {
+                emphsis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgb(0, 0, 0, 0.5)'
+                 }
+            }
+        }]
+    };
+    myChart.setOption(option);
+    </script>
+
+</body>
+</html>

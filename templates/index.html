@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="static/css/engine.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Fin Search!</title>
+</head>
+<body>
+    <div class='container'>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Fin Search</h1>
+                <p class="lead">You know, for search, for finance</p>
+            </div>
+        </div>
+
+        <div class="input-group mb-3 pd1">
+            <input type="text" class="form-control" placeholder="输入关键词进行搜索" id="search-text">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="search-btn">搜索</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#search-btn").click(function(){
+            text = $('#search-text').val();
+            window.location.href = "http://192.168.204.128:5000/search?wd=" + text;
+        });
+    });
+    </script>
+</body>
+</html>

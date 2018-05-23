@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="static/css/engine.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>{{keyword}} - Fin Search!</title>
+</head>
+<body>
+    <div class='container'>
+        <!-- 搜索框 -->
+        <div class="input-group" style="margin: 20px 0;">
+            <input type="text" class="form-control" value="{{keyword}}" id="kw-text">
+            <span class="input-group-btn">
+                <button class="btn btn-outline-secondary" type="button" id="search-btn">搜索</button>
+            </span>
+        </div>
+        
+        <!-- filter
+        <div class="row" style="padding:30px 0;">
+            <div class="col-lg-6">
+                <select class="form-control">
+                    <option>时间不限</option>
+                    <option>一天内</option>
+                    <option>一周内</option>
+                    <option>一月内</option>
+                    <option>一年内</option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" placeholder="站点内搜索"/>
+            </div>
+        </div>
+        -->
+
+        <!-- results lists -->
+        <div class="alert alert-success" role="alert">Fin&nbsp;Search为您找到相关结果共{{length}}条</div>
+        <div class="results-box">
+            {% for item in results %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    {{item.job_name}}
+                </div>
+                <div class="panel-body">
+                    <span class="label label-warning">{{item.salary}}</span>
+                    <span class="label label-success">{{item.company_name}}</span>
+                    <hr/>
+                    {% if item.job_summary != "" %}
+                    {{item.job_summary|safe}}
+                    {% else %}
+                    暂无职位信息
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <ul id="page">
+        </ul>
+    </div>
+
+    <script src="static/js/jquery.min.js"></script>
+    <!--
+    <script src="static/js/bootstrap.min.js"></script>
+    -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="static/js/bootstrap-paginator.js"></script>
+    <script>
+    $(document).ready(function(){
+        // 获取关键词
+        text = $("#kw-text").val();
+        
+        $("#search-btn").click(function(){
+            window.location.href = "http://192.168.204.128:5000/search?wd=" + text
+        })
+
+        var currentPage = {{current_page}};
+        var totalPages = Math.ceil({{length}}/10);
+        $("#page").bootstrapPaginator({
+            bootstrapMajorVersion: 3, //对应的bootstrap版本
+            currentPage: currentPage, //当前页数
+            numberOfPages: 10, //每次显示页数
+            totalPages: totalPages, //总页数
+            shouldShowPage: true, //是否显示该按钮
+            useBootstrapTooltip: true,
+            //点击事件
+            onPageClicked: function(event, originalEvent, type, page) {
+                window.location.href = "http://www.baidu.com";
+                window.location.href = "http://192.168.204.128:5000/search?wd=" + text + "&page=" + page
+            }
+        });
+                     
+    });
+    </script>
+
+</body>
+</html>
