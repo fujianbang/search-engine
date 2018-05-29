@@ -37,7 +37,7 @@
         -->
 
         <!-- results lists -->
-        <div class="alert alert-success" role="alert">Fin&nbsp;Search为您找到相关结果共{{length}}条</div>
+        <div class="alert alert-success" role="alert">Fin&nbsp;Search为您找到{{total}}条结果（用时{{took/1000.0}}秒）</div>
         <div class="results-box">
             {% for item in results %}
             <div class="panel panel-primary">
@@ -45,8 +45,11 @@
                     {{item.job_name}}
                 </div>
                 <div class="panel-body">
+                    <h3><span>{{item.company_name}}</span>&nbsp;&nbsp<span class="label label-info">{{item.regin}}</span></h3>
+                    <span class="label label-success">{{item.job_require_degree}}</span>
+                    <span class="label label-success">{{item.job_require_experience}}</span>
+                    <span class="label label-success">{{item.job_require_number}}</span>
                     <span class="label label-warning">{{item.salary}}</span>
-                    <span class="label label-success">{{item.company_name}}</span>
                     <hr/>
                     {% if item.job_summary != "" %}
                     {{item.job_summary|safe}}
@@ -62,23 +65,22 @@
         </ul>
     </div>
 
-    <script src="static/js/jquery.min.js"></script>
-    <!--
-    <script src="static/js/bootstrap.min.js"></script>
-    -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="static/js/bootstrap-paginator.js"></script>
+    <!-- 分页脚本 -->
     <script>
-    $(document).ready(function(){
+    $(function(){
         // 获取关键词
         text = $("#kw-text").val();
         
         $("#search-btn").click(function(){
-            window.location.href = "http://192.168.204.128:5000/search?wd=" + text
+            text = $("#kw-text").val();
+            window.location.href = "http://{{request_addr}}/search?wd=" + text
         })
 
         var currentPage = {{current_page}};
-        var totalPages = Math.ceil({{length}}/10);
+        var totalPages = Math.ceil({{total}}/10);
         $("#page").bootstrapPaginator({
             bootstrapMajorVersion: 3, //对应的bootstrap版本
             currentPage: currentPage, //当前页数
@@ -88,8 +90,7 @@
             useBootstrapTooltip: true,
             //点击事件
             onPageClicked: function(event, originalEvent, type, page) {
-                window.location.href = "http://www.baidu.com";
-                window.location.href = "http://192.168.204.128:5000/search?wd=" + text + "&page=" + page
+                window.location.href = "http://{{request_addr}}/search?wd=" + text + "&page=" + page
             }
         });
                      
