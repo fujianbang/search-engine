@@ -13,7 +13,7 @@ app.debug = True
 
 @app.route("/")
 def engine():
-    return render_template('index.html')
+    return render_template('index.html', request_addr=REQUEST_ADDR)
 
 @app.route("/search")
 def search():
