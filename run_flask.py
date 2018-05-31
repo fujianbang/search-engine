@@ -5,7 +5,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
-from services import *
+from services.base import *
 from settings import *
 
 app = Flask(__name__)

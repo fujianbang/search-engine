@@ -53,6 +53,7 @@ def search_jobs_by_kw(kw, page, size=10):
     data = []
     for hit in results['hits']['hits']:
         data.append(hit['_source'])
+        print(hit['_score'])
 
     return {'data':data, 'total':results['hits']['total'], 'took':results['took']}
 
